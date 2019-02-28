@@ -32,7 +32,7 @@ class Job:
 class Transporter:
     def __init__(self, name, rating=0, trucks=None):
         self.name = name
-        self.rating = 0.0
+        self.rating = rating
         if(trucks):
             self.trucks = trucks
         else:
@@ -67,3 +67,4 @@ class Bid:
     @property
     def rating(self):
         return self.transporter.rating
+
