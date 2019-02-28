@@ -106,3 +106,5 @@ Planning
 
 	3. Other functionality
 		Assure the uniqueness of Transporter and Shipper
+
+	Fix the import issue if in different .py file
