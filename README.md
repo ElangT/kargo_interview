@@ -21,11 +21,14 @@ Requirements:
 			Ship Date
 			Ship Duration
 
-Mapping Problem
-Start Shipping -> 
-Start Transporter ->
+Mapping Problem:
+
+	Start Shipping -> Input Jobs -> Input Bid -> Sort Bid
+
+	Start Transporter -> Sort Jobs -> Input Bid
 
 Solution Structure:
+
 	Entity:
 		Shipper:
 			Attribute:
@@ -58,28 +61,32 @@ Solution Structure:
 				Transporter.Name
 
 Data structure
+
 	Shipper has many job
 	Job has many Bid
 	Transporter has many Bid
 	Transporter has many Truck
 
 Pseudo Code
-Class Shipper
-	getAttribute()
-	createJob()
 
-Class Job
-	getAttribute()
-	SortBid(sort_type)
+	Class Shipper
+		getAttribute()
+		createJob()
 
-Class Transporter
-	getAttribute()
-	SortJob(sort_type)
-	CreateBid(job)
-Class Bid
-	getAttribute()
+	Class Job
+		getAttribute()
+		SortBid(sort_type)
+
+	Class Transporter
+		getAttribute()
+		SortJob(sort_type)
+		CreateBid(job)
+
+	Class Bid
+		getAttribute()
 
 Planning
+
 	Fungsionalitas:
 		Sort Bid(type)
 		Sort Job(type)
