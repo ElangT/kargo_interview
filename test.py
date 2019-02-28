@@ -1,9 +1,10 @@
 from solution import Job, Transporter, Bid
 import unittest
+from datetime import datetime
 
 class SortBidTest(unittest.TestCase):
     def setUp(self):
-        self.job = Job()
+        self.job = Job(100, "A", "B", datetime.strptime('Jun 3 2019', '%b %d %Y'), 30)
         self.tr1 = Transporter("C", rating=4, trucks=["1", "2"])
         self.tr2 = Transporter("B", trucks=["1", "2"])
         self.tr3 = Transporter("A", trucks=["3", "1"])
@@ -22,6 +23,23 @@ class SortBidTest(unittest.TestCase):
 
     def test_fail_sort(self):
         self.assertRaises(AttributeError, self.job.sort_bid, "weee")
+
+
+class SortJobTest(unittest.TestCase):
+    def setUp(self):
+        self.job1 = Job(100, "A", "B", datetime.strptime('Jun 3 2019', '%b %d %Y'), 30)
+        self.job2 = Job(200, "B", "C", datetime.strptime('Jun 1 2019', '%b %d %Y'), 31)
+        self.job3 = Job(300, "A", "C", datetime.strptime('Jun 2 2019', '%b %d %Y'), 34)
+        self.market = [self.job1, self.job2, self.job3]
+
+    def test_default_sort(self):
+        self.assertEqual(Transporter.sort_job(self.market), [self.job1, self.job2, self.job3])
+
+    def test_start_date_sort(self):
+        self.assertEqual(Transporter.sort_job(self.market, "ship_date"), [self.job2, self.job3, self.job1])
+
+    def test_fail_sort(self):
+        self.assertRaises(AttributeError, Transporter.sort_job, self.market,"weee")
 
 if __name__ == '__main__':
     unittest.main()

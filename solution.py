@@ -1,8 +1,26 @@
-import unittest
+# Mocking the count distance
+def count_distance(origin, destination):
+    return 1
+
+class Shipper:
+    def __init__(self):
+        self.jobs = []
+
+    def create_job(self, budget, origin, destination, ship_date, ship_duration):
+        job = Job(budget, origin, destination, ship_date, ship_duration)
+        self.jobs.append(job)
+        return job
 
 class Job:
-    def __init__(self):
+    def __init__(self, budget, origin, destination, ship_date, ship_duration):
+        self.budget = budget
+        self.origin = origin
+        self.destination = destination
+        self.ship_date = ship_date
+        self.ship_duration = ship_duration
+        self.distance = count_distance(self.origin, self.destination)
         self.bids = []
+    
     def add_bid(self, bid):
         self.bids.append(bid)
     def sort_bid(self, sort_type="truck_name", reverse=False):
@@ -28,9 +46,13 @@ class Transporter:
         else:
             raise LookupError("{} don't exist inside {}'s truck list".format(truck_name, self.name))
 
-    @staticmethod
-    def sort_job(sort_type="budget"):
-        pass
+    @classmethod
+    def sort_job(cls, job_market, sort_type="budget", reverse=False):
+        try:
+            return sorted(job_market, key=lambda x: getattr(x, sort_type), reverse=reverse)
+        except AttributeError:
+            raise AttributeError("{} is not a valid sort_type", sort_type)
+        
 
 class Bid:
     def __init__(self, transporter, budget, truck):
