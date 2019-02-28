@@ -87,8 +87,22 @@ Pseudo Code
 
 Planning
 
-	Fungsionalitas:
-		Sort Bid(type)
-		Sort Job(type)
-		CreateBid
-	Buat test
+	1. Sort Bids functionality
+		Transporter
+			- create bid
+		Job
+			- add bid
+			- sort bid
+		Bid
+			- getter for some attribute
+
+	2. Sort Jobs functionality
+		Shipper
+			- Create Job
+		Transporter
+			- Sort Bid
+
+	Buat test for every functionality?
+
+	3. Other functionality
+		Assure the uniqueness of Transporter and Shipper
